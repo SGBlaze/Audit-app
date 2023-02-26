@@ -2053,10 +2053,10 @@ def showerror(request):
 def register(request):
 
 
-    if str(request.user) == "AnonymousUser":
-        return redirect('login')
+    # if str(request.user) == "AnonymousUser":
+    #     return redirect('login')
 
-    elif Profile.objects.filter(user=request.user, role="deliverydriver").exists():
+    if Profile.objects.filter(user=request.user, role="deliverydriver").exists():
         return redirect('login')
 
     elif Profile.objects.filter(user=request.user, role="shopattendant").exists():    
