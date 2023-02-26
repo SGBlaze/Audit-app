@@ -1473,6 +1473,9 @@ def settings(request):
                     makeNewProduct = Products.objects.create(name=nameOfProduct, referenceName=refNameOfProduct, image=imageOfProduct, company=crtecompany, costPrice=costPriceOfProduct, subPrice=subPriceOfProduct, wholesalePrice=wholesalePriceOfProduct, retailPrice=retailPriceOfProduct)
                     makeNewProduct.save()
 
+                else:
+                    pass
+
             elif 'removeoldproduct' in request.POST:
                     getProductToRemove = Products.objects.get(name=request.POST['nameofproduct'])
                     getProductToRemove.delete()            
