@@ -1,1 +1,1 @@
-web: gunicorn auditor.wsgi --logfile -
+web: gunicorn auditor.wsgi
