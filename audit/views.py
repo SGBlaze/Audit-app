@@ -1483,7 +1483,8 @@ def settings(request):
                     pass
 
             elif 'removeoldproduct' in request.POST:
-                    getProductToRemove = Products.objects.get(name=request.POST['nameofproduct'])
+                    remPt = request.POST['nameofproduct']
+                    getProductToRemove = Products.objects.get(name=remPt)
                     getProductToRemove.delete()     
                     return redirect('settings')
 
