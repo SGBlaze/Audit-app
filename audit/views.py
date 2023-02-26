@@ -1444,6 +1444,7 @@ def settings(request):
                 athUser = User.objects.get(username=newEmployeeName)
                 newProfile = Profile.objects.create(user=athUser, role="shopattendant", accessStat=True)
                 newProfile.save()
+                return redirect('settings')
 
             elif 'deleteoldemployee' in request.POST:
                 delEmployeeName = request.POST['delemployeename']
@@ -1452,6 +1453,8 @@ def settings(request):
                 delProfile = Profile.objects.get(user=delUser)
                 delProfile.delete()
                 delUser.delete()
+                return redirect('settings')
+
 
             elif 'createnewproduct' in request.POST:
                 nameOfProduct = request.POST['nameofproduct']
@@ -1481,7 +1484,9 @@ def settings(request):
 
             elif 'removeoldproduct' in request.POST:
                     getProductToRemove = Products.objects.get(name=request.POST['nameofproduct'])
-                    getProductToRemove.delete()            
+                    getProductToRemove.delete()     
+                    return redirect('settings')
+
 
             
             elif 'changepriceofproduct' in request.POST:
@@ -1493,6 +1498,8 @@ def settings(request):
 
                 cpGetProduct = Products.objects.filter(name=cpNameOfProduct)
                 cpGetProduct.update(costPrice=cpNewCostPriceOfProduct, subPrice=cpNewSubPriceOfProduct, wholesalePrice=cpNewWholesalePriceOfProduct, retailPrice=cpNewRetailPriceOfProduct)
+                return redirect('settings')
+
 
             elif 'changeyourpassword' in request.POST:
                 nameOfAdmin = request.POST['nameofadmin']
@@ -1510,6 +1517,8 @@ def settings(request):
                     newUser.save()
                     newProfile = Profile.objects.create(user=newUser, role="admin", accessStat=True)
                     newProfile.save()
+                    return redirect('settings')
+
 
                 else:
                     messages.info(request, "The credentials of the admin were incorrect!!")
@@ -1525,6 +1534,8 @@ def settings(request):
                 addNewUser.save()
                 addNewProfile = Profile.objects.create(user=addNewUser, role="deliverydriver", accessStat=True)
                 addNewProfile.save()
+                return redirect('settings')
+
 
 
             elif 'deleteolddriver' in request.POST:
@@ -1534,6 +1545,8 @@ def settings(request):
                 getDriverProf = Profile.objects.get(user=getUser, role="deliverydriver")
                 getUser.delete()
                 getDriverProf.delete()
+                return redirect('settings')
+
 
 
             elif 'createnewsub' in request.POST:
@@ -1541,12 +1554,16 @@ def settings(request):
 
                 createSub = SubDistributors.objects.create(name=newSubName)
                 createSub.save()
+                return redirect('settings')
+
 
             elif 'deleteoldsub' in request.POST:
                 oldSubName = request.POST['deleteoldsubname']
 
                 oldSubDelete = SubDistributors.objects.filter(name=oldSubName)
                 oldSubDelete.delete()
+                return redirect('settings')
+
 
 
             elif 'shuteveryoneout' in request.POST:
@@ -1555,6 +1572,8 @@ def settings(request):
 
                 trueAccessProfiles.update(accessStat=False)
                 ddTrueAccessProfiles.update(accessStat=False)
+                return redirect('settings')
+
 
 
                 
