@@ -1466,12 +1466,15 @@ def settings(request):
                     getCompany = Company.objects.get(name=request.POST['fromexistingcompany'])
                     newProduct = Products.objects.create(name=nameOfProduct, referenceName=refNameOfProduct, image=imageOfProduct, company=getCompany, costPrice=costPriceOfProduct, subPrice=subPriceOfProduct, wholesalePrice=wholesalePriceOfProduct, retailPrice=retailPriceOfProduct)
                     newProduct.save()
+                    return redirect('settings')
 
                 elif 'newcompanyname' in request.POST:
                     crtecompany = Company.objects.create(name=request.POST['newcompanyname'], referenceName=request.POST['refnameofnewcompany'])
                     crtecompany.save()
                     makeNewProduct = Products.objects.create(name=nameOfProduct, referenceName=refNameOfProduct, image=imageOfProduct, company=crtecompany, costPrice=costPriceOfProduct, subPrice=subPriceOfProduct, wholesalePrice=wholesalePriceOfProduct, retailPrice=retailPriceOfProduct)
                     makeNewProduct.save()
+
+                    return redirect('settings')
 
                 else:
                     pass
