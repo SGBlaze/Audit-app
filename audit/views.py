@@ -321,6 +321,8 @@ def stockQuantity(request):
                     else:
                         pass
 
+                    return redirect('index')
+
                             
                 elif 'new-stock' in request.POST:
                     nwstHis = {}
@@ -354,6 +356,8 @@ def stockQuantity(request):
 
                     tnstHis = NewStockHistory.objects.filter(productsData={})
                     tnstHis.delete()
+
+                    return redirect('index')
 
                                 
 
@@ -1622,6 +1626,9 @@ def deliveryShop(request):
                         deliveryShopRecord = ShopDeliveryRecord.objects.create(driverName=nameOfDriver, productData=pTaken)
                         deliveryShopRecord.save()
 
+                        return redirect('deliveryshop')
+                        
+
 
                 elif 'goodsbroughtback' in request.POST:
 
@@ -1634,6 +1641,8 @@ def deliveryShop(request):
                                 pBb = {"productBroughtBack": request.POST[b]}
                                 product[b].update(pBb)
                                 goodsBb.update(productData=product)
+
+                    return redirect('deliveryshop')
                         
 
                 elif 'amountbroughtback' in request.POST:
@@ -1725,6 +1734,8 @@ def delivery(request):
                 else:
                     pass
 
+                return redirect('delivery')
+
             if "deliverycustomername" in request.POST:
                 prodDetails = {}
                 slsId = ActiveDeliveryStartRecord.objects.first()
@@ -1744,6 +1755,8 @@ def delivery(request):
                 elif request.POST['modeofpayment'] == 'Transfer':
                     crte = ActiveDeliverySalesRecord.objects.create(salesId=slsId.salesId, deliveryCustName=request.POST['deliverycustomername'], deliveryProductData=prodDetails, productValue=request.POST['productvalue'], modeOfPayment=request.POST['modeofpayment'])
                     crte.save()
+
+                return redirect('delivery')
                         
 
             if "deliverygoodsreturned" in request.POST:
@@ -1754,6 +1767,8 @@ def delivery(request):
                         product = Products.objects.get(name=n)
                         producVali = ActiveDeliveryStartRecord.objects.filter(productTaken=product)
                         producVali.update(productQuantityBroughtBack=request.POST[n])
+
+                return redirect('delivery')
 
             if "deliveryamountbroughtback" in request.POST:
                 salesIdLst = []
@@ -1805,6 +1820,8 @@ def delivery(request):
 
                         val.delete()
                         valSales.delete()
+
+                return redirect('delivery')
 
                         
 
@@ -2063,6 +2080,8 @@ def invoice(request):
             companyValidate = Company.objects.get(name=invoiceData['company'])
             registerInvoice = Invoice.objects.create(company=companyValidate, invoiceNumber=invoiceData['invoicenumber'], invoiceImage=invoiceImg)
             registerInvoice.save()
+
+            return redirect('index')
 
         return render(request, 'audit/invoice.html', {"companies": companies})
     
